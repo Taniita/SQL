@@ -38,15 +38,26 @@ values ('Inna', 8),
 
       
       
- select Person.person_name, Person.city_id, City.city_name, City.id
- from Person join City
- on Person.city_id = City.id;
+select Person.person_name, Person.city_id, City.city_name, City.id
+from Person join City
+on Person.city_id = City.id;
 
 
- select Person.person_name, Person.city_id, City.city_name, City.id
- from Person left join City
- on Person.city_id = City.id;
+select Person.person_name, Person.city_id, City.city_name, City.id
+from Person left join City
+on Person.city_id = City.id;
  
 select Person.person_name, Person.city_id, City.city_name, City.id
- from Person right join City
- on Person.city_id = City.id;
+from Person right join City
+on Person.city_id = City.id 
+
+
+select Person.person_name, Person.city_id, City.city_name, City.id
+from Person full join City
+on Person.city_id = City.id;
+
+
+select Person.person_name, Person.city_id, City.city_name, City.id
+from Person cross join City;
+
+
