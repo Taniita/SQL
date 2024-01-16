@@ -32,8 +32,6 @@ values ('X', 4, 8, 400),
     
    
    
-   
-   
  create table phones_samsung(
      id serial primary key,
      model varchar(40),
@@ -91,12 +89,14 @@ values (2),
        (1),
        (5);
     
-      
-select avg(price) from phones_apple; 
-select * from phones_samsung;
+
 select * from phones_apple;
-select avg(price) from phones_samsung;
+select avg(price) from phones_apple; 
 select price from phones_apple where price < 1000;
+
+select * from phones_samsung;
+select avg(price) from phones_samsung;
+
 
 
 select * from phones_apple
@@ -109,9 +109,6 @@ where price > (select avg(price) from phones_samsung);
 
 select * from phones_apple
 where price in (select price from phones_samsung);
-
-select * from phones_apple
-where price > (select avg(price) from phones_apple);
 
 
 select * from phones_apple
@@ -140,3 +137,7 @@ where price > any (select price from phones_apple where price < 1000);
 
 select * from phones_samsung 
 where price = any (select price from phones_apple where price < 1000);
+
+
+select * from phones_samsung 
+where price <> any (select price from phones_apple where price < 1000);
