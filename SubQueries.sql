@@ -1,3 +1,80 @@
+-- SUBQUERIES
+
+select * from phones_apple;
+select avg(price) from phones_apple; 
+select price from phones_apple where price < 1000;
+
+select * from phones_samsung;
+select avg(price) from phones_samsung;
+
+
+select * from phones_apple
+where price > (select avg(price) from phones_apple);
+     
+
+select * from phones_apple
+where price > (select avg(price) from phones_samsung);
+
+
+select * from phones_apple
+where price in (select price from phones_samsung);
+
+
+select * from phones_apple
+where price not in (select avg(price) from phones_samsung);
+
+
+select * from phones_samsung 
+where price < all(select price from phones_apple where price < 1000);
+
+
+select * from phones_samsung 
+where price > all(select price from phones_apple where price < 1000);
+
+
+select * from phones_samsung 
+where price <> all(select price from phones_apple where price < 1000);
+
+
+select * from phones_samsung 
+where price < any (select price from phones_apple where price < 1000);
+
+
+select * from phones_samsung 
+where price > any (select price from phones_apple where price < 1000);
+
+
+select * from phones_samsung 
+where price = any (select price from phones_apple where price < 1000);
+
+
+select * from phones_samsung 
+where price <> any (select price from phones_apple where price < 1000);
+
+
+-- UNION
+
+select model, ram, price from phones_apple 
+union all
+select model, ram, price from phones_samsung where price < 1000; 
+
+
+-- GROUP BY
+
+select ram, count(*) from phones_apple 
+group by (ram);
+
+select front_camera, avg(price) from phones_apple
+group by (front_camera);
+
+select front_camera, avg(price), min(price) from phones_apple
+group by (front_camera);
+
+select front_camera, avg(price), min(price), count(*) from phones_apple
+group by (front_camera);
+
+
+
 select * from samsung_orders;
 select * from apple_orders;
 select * from phones_apple;
@@ -88,56 +165,4 @@ insert into samsung_orders(phone_id)
 values (2),
        (1),
        (5);
-    
-
-select * from phones_apple;
-select avg(price) from phones_apple; 
-select price from phones_apple where price < 1000;
-
-select * from phones_samsung;
-select avg(price) from phones_samsung;
-
-
-
-select * from phones_apple
-where price > (select avg(price) from phones_apple);
-     
-
-select * from phones_apple
-where price > (select avg(price) from phones_samsung);
-
-
-select * from phones_apple
-where price in (select price from phones_samsung);
-
-
-select * from phones_apple
-where price not in (select avg(price) from phones_samsung);
-
-
-select * from phones_samsung 
-where price < all(select price from phones_apple where price < 1000);
-
-
-select * from phones_samsung 
-where price > all(select price from phones_apple where price < 1000);
-
-
-select * from phones_samsung 
-where price <> all(select price from phones_apple where price < 1000);
-
-
-select * from phones_samsung 
-where price < any (select price from phones_apple where price < 1000);
-
-
-select * from phones_samsung 
-where price > any (select price from phones_apple where price < 1000);
-
-
-select * from phones_samsung 
-where price = any (select price from phones_apple where price < 1000);
-
-
-select * from phones_samsung 
-where price <> any (select price from phones_apple where price < 1000);
+  
